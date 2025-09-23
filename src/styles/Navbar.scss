@@ -1,0 +1,50 @@
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0 2rem;
+	background-color: #222;
+	color: white;
+
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+
+	&__logo {
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: #61dafb;
+	}
+
+	&__links {
+		list-style: none;
+		display: flex;
+		gap: 2rem;
+
+		li {
+			a,
+			button {
+				// <- applique le style aux liens ET boutons
+				color: white;
+				text-decoration: none;
+				font-weight: 500;
+				background: none;
+				border: none;
+				cursor: pointer;
+				font-size: 1rem;
+				transition: color 0.3s ease;
+				padding: 0;
+
+				&:hover {
+					color: #61dafb;
+				}
+			}
+		}
+	}
+}

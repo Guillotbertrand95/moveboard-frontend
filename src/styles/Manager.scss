@@ -1,0 +1,21 @@
+.intro-manager {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin: 20px 0;
+	gap: 10px;
+}
+.action-manager {
+	margin-left: 50px;
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); // 2 colonnes fixes
+	grid-template-rows: repeat(2, 1fr); // 2 lignes fixes (optionnel)
+	gap: 1.5rem;
+	width: 80%;
+	height: 300px;
+}

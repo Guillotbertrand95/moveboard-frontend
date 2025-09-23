@@ -1,5 +1,5 @@
 .dashboard-container {
-	display: flex;
+	display: flex; /* corrige "flexbox" */
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -10,23 +10,24 @@
 .dashboard-buttons {
 	margin-top: 2rem;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: repeat(2, 1fr); // 2 colonnes fixes
+	grid-template-rows: repeat(2, 1fr); // 2 lignes fixes (optionnel)
 	gap: 1.5rem;
 	width: 80%;
+	height: 300px;
 }
 
-.dashboard-btn {
-	padding: 2rem;
-	background: white;
-	border-radius: 1rem;
-	font-size: 1.25rem;
-	font-weight: bold;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	transition: all 0.2s;
+.dashboard-buttons button {
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
+	border: none;
+	background-color: #61dafb;
+	color: white;
+	border-radius: 8px;
 	cursor: pointer;
+	transition: background 0.3s ease;
 }
 
-.dashboard-btn:hover {
-	background: #e0f2fe;
-	transform: scale(1.05);
+.dashboard-buttons button:hover {
+	background-color: #21a1f1;
 }

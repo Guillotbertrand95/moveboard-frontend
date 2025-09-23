@@ -11,3 +11,13 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+const API_URL = "http://localhost:5000/api/staff"; // adapte si différent
+
+export const addStaffMember = async (staffData, token) => {
+	const res = await axios.post(API_URL, staffData, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return res.data;
+};
