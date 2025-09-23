@@ -4,39 +4,50 @@ import "../styles/Manager.scss";
 import Modal from "../components/Modal";
 import ModalButton from "../components/ModalButton";
 import GenericForm from "../components/GenericForm";
+import { addStaffMember, addSupplier } from "../api/apiService";
 
 export default function Manager() {
-	// État pour savoir quelle modale est ouverte
-	const [openModal, setOpenModal] = useState(null); // 'collaborator', 'supplier', 'information'
+	const [openModal, setOpenModal] = useState(null); // 'collaborator', 'supplier', 'information', null
+	const token = localStorage.getItem("token"); // récupère le token JWT
 
-	// Champs pour collaborateur
+	// Champs pour GenericForm
 	const collaboratorFields = [
-		{ name: "name", label: "Nom du collaborateur" },
-		{ name: "firstname", label: "Prénom du collaborateur" },
+		{ name: "name", label: "Nom" },
+		{ name: "firstname", label: "Prénom" },
 		{ name: "section", label: "Section" },
 		{ name: "role", label: "Rôle" },
 		{ name: "telephone", label: "Téléphone" },
 		{ name: "email", label: "Email", type: "email" },
 	];
 
-	// Fonction soumission collaborateur
-	const handleAddCollaborator = (data) => {
-		console.log("Ajouter collaborateur :", data);
-		setOpenModal(null); // fermer la modale après soumission
-	};
-
-	// Champs pour fournisseur
 	const supplierFields = [
 		{ name: "name", label: "Nom du fournisseur" },
 		{ name: "email", label: "Email", type: "email" },
 		{ name: "phone", label: "Téléphone" },
 	];
 
-	// Fonction soumission fournisseur
-	const handleAddSupplier = (data) => {
-		console.log("Ajouter fournisseur :", data);
-		setOpenModal(null);
-	};
+	async function handleAddCollaborator(data) {
+		try {
+			await addStaffMember(data); // token injecté automatiquement
+			console.log("Collaborateur ajouté !");
+			setOpenModal(null); // fermer la modale
+			// ici tu peux rafraîchir la liste ou afficher un message
+		} catch (err) {
+			console.error(err);
+			alert("Erreur lors de l'ajout du collaborateur");
+		}
+	}
+
+	async function handleAddSupplier(data) {
+		try {
+			await addSupplier(data);
+			console.log("Fournisseur ajouté !");
+			setOpenModal(null);
+		} catch (err) {
+			console.error(err);
+			alert("Erreur lors de l'ajout du fournisseur");
+		}
+	}
 
 	return (
 		<div className="manager">
@@ -87,11 +98,11 @@ export default function Manager() {
 					</Modal>
 				)}
 
-				{/* Modale Informations */}
+				{/* Modale Information */}
 				{openModal === "information" && (
 					<Modal onClose={() => setOpenModal(null)}>
 						<h2>Ajouter des informations</h2>
-						{/* Ici tu pourras mettre un GenericForm ou autre contenu */}
+						{/* Ici tu peux mettre un autre GenericForm si besoin ou un contenu spécifique */}
 					</Modal>
 				)}
 			</div>

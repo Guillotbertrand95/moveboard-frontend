@@ -2,33 +2,34 @@ import { useState } from "react";
 import "../styles/GenericForm.scss";
 
 export default function GenericForm({ fields, onSubmit, submitLabel }) {
-	//initalise les valeurs des champs
-	const initalValues = {};
+	// Initialise les valeurs des champs
+	const initialValues = {};
 	fields.forEach((field) => {
-		initalValues[field.name] = field.defaultValue || "";
+		initialValues[field.name] = field.defaultValue || "";
 	});
-	const [Values, setValues] = useState(initalValues);
+	const [values, setValues] = useState(initialValues);
 
 	const handleChange = (e) => {
 		setValues({
-			...Values,
+			...values,
 			[e.target.name]: e.target.value,
 		});
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		onSubmit(Values);
+		onSubmit(values); // Ici on envoie les données au parent (Manager.jsx)
 	};
+
 	return (
-		<form onSbubmit={handleSubmit} className="generic-form">
+		<form onSubmit={handleSubmit} className="generic-form">
 			{fields.map((field) => (
 				<div key={field.name} className="form-group">
 					<label>{field.label}</label>
 					{field.type === "textarea" ? (
 						<textarea
 							name={field.name}
-							value={Values[field.name]}
+							value={values[field.name]}
 							onChange={handleChange}
 							placeholder={field.placeholder || ""}
 						/>
@@ -36,7 +37,7 @@ export default function GenericForm({ fields, onSubmit, submitLabel }) {
 						<input
 							type={field.type || "text"}
 							name={field.name}
-							value={Values[field.name]}
+							value={values[field.name]}
 							onChange={handleChange}
 							placeholder={field.placeholder || ""}
 						/>
