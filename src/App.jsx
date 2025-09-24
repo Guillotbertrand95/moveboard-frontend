@@ -13,6 +13,7 @@ import Reservations from "./pages/Reservations";
 import Tasks from "./pages/Tasks";
 
 import Manager from "./pages/Manager";
+import Office from "./pages/Office";
 export default function App() {
 	return (
 		<Router>
@@ -22,7 +23,7 @@ export default function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 
-				{/* Routes privées avec Layout */}
+				{/* Routes privées */}
 				<Route
 					element={
 						<PrivateRoute>
@@ -34,9 +35,8 @@ export default function App() {
 					<Route path="/stock" element={<Stock />} />
 					<Route path="/reservations" element={<Reservations />} />
 					<Route path="/tasks" element={<Tasks />} />
-					<Route path="/manager" element={<Manager />}>
-						{/* Tu peux ajouter ici la partie manager plus tard */}
-					</Route>
+					<Route path="/manager" element={<Manager />} />
+					<Route path="/office" element={<Office />} />
 				</Route>
 			</Routes>
 		</Router>

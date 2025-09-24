@@ -1,4 +1,3 @@
-// services/api.js
 import axios from "axios";
 
 const api = axios.create({
@@ -21,6 +20,12 @@ export const addStaffMember = async (staffData) => {
 // Fournisseurs (à adapter selon ton backend)
 export const addSupplier = async (supplierData) => {
 	const res = await api.post("/supplier", supplierData);
+	return res.data;
+};
+
+// Informations générales (Info)
+export const addInformation = async (infoData) => {
+	const res = await api.post("/info", infoData);
 	return res.data;
 };
 

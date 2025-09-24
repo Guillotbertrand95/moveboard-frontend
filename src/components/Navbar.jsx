@@ -21,7 +21,7 @@ function Navbar() {
 					<Link to="/Manager">Manager</Link>
 				</li>
 				<li>
-					<Link to="/settings">Paramètres</Link>
+					<Link to="/Office">Office</Link>
 				</li>
 				{isAuthenticated && (
 					<li>

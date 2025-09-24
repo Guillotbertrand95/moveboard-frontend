@@ -18,6 +18,7 @@ export default function GenericForm({ fields, onSubmit, submitLabel }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log("💡 Data envoyée :", values); // <-- vérifie ici
 		onSubmit(values); // Ici on envoie les données au parent (Manager.jsx)
 	};
 

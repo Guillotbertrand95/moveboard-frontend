@@ -4,7 +4,7 @@ import "../styles/Manager.scss";
 import Modal from "../components/Modal";
 import ModalButton from "../components/ModalButton";
 import GenericForm from "../components/GenericForm";
-import { addStaffMember, addSupplier } from "../api/apiService";
+import { addStaffMember, addSupplier, addInformation } from "../api/apiService";
 
 export default function Manager() {
 	const [openModal, setOpenModal] = useState(null); // 'collaborator', 'supplier', 'information', null
@@ -26,8 +26,31 @@ export default function Manager() {
 		{ name: "phone", label: "Téléphone" },
 	];
 
+	const informationFields = [
+		{ name: "title", label: "Titre" },
+		{ name: "email", label: "Email", type: "email" },
+		{ name: "phone", label: "Téléphone" },
+		{ name: "address", label: "Adresse" },
+		{ name: "hour", label: "Heure" },
+		{ name: "content", label: "Contenu", type: "textarea" },
+	];
+
+	async function handleAddInformation(data) {
+		try {
+			// Appelle une fonction API pour ajouter des informations (à créer)
+			console.log("💡 Données envoyées au backend :", data); // <--- check ici
+			await addInformation(data);
+			console.log("Informations ajoutées !");
+			setOpenModal(null);
+		} catch (err) {
+			console.error(err);
+			alert("Erreur lors de l'ajout des informations");
+		}
+	}
+
 	async function handleAddCollaborator(data) {
 		try {
+			console.log("💡 Données envoyées au backend :", data); // <--- check ici
 			await addStaffMember(data); // token injecté automatiquement
 			console.log("Collaborateur ajouté !");
 			setOpenModal(null); // fermer la modale
@@ -102,7 +125,11 @@ export default function Manager() {
 				{openModal === "information" && (
 					<Modal onClose={() => setOpenModal(null)}>
 						<h2>Ajouter des informations</h2>
-						{/* Ici tu peux mettre un autre GenericForm si besoin ou un contenu spécifique */}
+						<GenericForm
+							fields={informationFields}
+							onSubmit={handleAddInformation}
+							submitLabel="Ajouter les informations"
+						/>
 					</Modal>
 				)}
 			</div>
