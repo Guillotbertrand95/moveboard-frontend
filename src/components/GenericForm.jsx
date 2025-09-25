@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/GenericForm.scss";
 
-export default function GenericForm({ fields, onSubmit, submitLabel }) {
-	// Initialise les valeurs des champs
-	const initialValues = {};
-	fields.forEach((field) => {
-		initialValues[field.name] = field.defaultValue || "";
-	});
-	const [values, setValues] = useState(initialValues);
+export default function GenericForm({
+	fields,
+	onSubmit,
+	submitLabel,
+	initialData = {},
+}) {
+	// Initialise les valeurs avec initialData OU valeur par défaut
+	const getInitialValues = () => {
+		const initialValues = {};
+		fields.forEach((field) => {
+			initialValues[field.name] =
+				initialData[field.name] || field.defaultValue || "";
+		});
+		return initialValues;
+	};
+
+	const [values, setValues] = useState(getInitialValues);
+
+	// Si initialData change (quand tu passes en mode "edit"), on met à jour
+	useEffect(() => {
+		setValues(getInitialValues());
+	}, [initialData]);
 
 	const handleChange = (e) => {
 		setValues({
@@ -18,8 +33,8 @@ export default function GenericForm({ fields, onSubmit, submitLabel }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("💡 Data envoyée :", values); // <-- vérifie ici
-		onSubmit(values); // Ici on envoie les données au parent (Manager.jsx)
+		console.log("💡 Data envoyée :", values);
+		onSubmit(values);
 	};
 
 	return (
