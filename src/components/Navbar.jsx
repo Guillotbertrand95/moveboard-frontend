@@ -18,10 +18,10 @@ function Navbar() {
 					<Link to="/dashboard">Dashboard</Link>
 				</li>
 				<li>
-					<Link to="/Manager">Manager</Link>
+					<Link to="/manager">Manager</Link>
 				</li>
 				<li>
-					<Link to="/Office">Office</Link>
+					<Link to="/office">Office</Link>
 				</li>
 				{isAuthenticated && (
 					<li>

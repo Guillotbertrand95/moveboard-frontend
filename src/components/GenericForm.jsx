@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// src/components/GenericForm.jsx
+import { useState } from "react";
 import "../styles/GenericForm.scss";
 
 export default function GenericForm({
@@ -7,34 +8,24 @@ export default function GenericForm({
 	submitLabel,
 	initialData = {},
 }) {
-	// Initialise les valeurs avec initialData OU valeur par défaut
-	const getInitialValues = () => {
-		const initialValues = {};
-		fields.forEach((field) => {
-			initialValues[field.name] =
-				initialData[field.name] || field.defaultValue || "";
-		});
-		return initialValues;
-	};
+	// Initialise les valeurs une seule fois, au montage
+	const initialValues = fields.reduce((acc, field) => {
+		acc[field.name] = initialData[field.name] ?? field.defaultValue ?? "";
+		return acc;
+	}, {});
 
-	const [values, setValues] = useState(getInitialValues);
-
-	// Si initialData change (quand tu passes en mode "edit"), on met à jour
-	useEffect(() => {
-		setValues(getInitialValues());
-	}, [initialData]);
+	const [values, setValues] = useState(initialValues);
 
 	const handleChange = (e) => {
-		setValues({
-			...values,
-			[e.target.name]: e.target.value,
-		});
+		const { name, value } = e.target;
+		setValues((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("💡 Data envoyée :", values);
 		onSubmit(values);
+		// Optionnel : reset après submit si nécessaire
+		// setValues(initialValues);
 	};
 
 	return (
@@ -49,6 +40,18 @@ export default function GenericForm({
 							onChange={handleChange}
 							placeholder={field.placeholder || ""}
 						/>
+					) : field.type === "select" ? (
+						<select
+							name={field.name}
+							value={values[field.name]}
+							onChange={handleChange}
+						>
+							{field.options?.map((opt) => (
+								<option key={opt} value={opt}>
+									{opt}
+								</option>
+							))}
+						</select>
 					) : (
 						<input
 							type={field.type || "text"}

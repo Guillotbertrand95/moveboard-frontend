@@ -10,7 +10,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Stock from "./pages/Stock";
 import Reservations from "./pages/Reservations";
-import Tasks from "./pages/Tasks";
+import TaskPage from "./pages/Task/TaskPage";
 
 import Manager from "./pages/Manager";
 import Office from "./pages/Office";
@@ -34,7 +34,8 @@ export default function App() {
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/stock" element={<Stock />} />
 					<Route path="/reservations" element={<Reservations />} />
-					<Route path="/tasks" element={<Tasks />} />
+					<Route path="/tasks" element={<TaskPage />} />
+
 					<Route path="/manager" element={<Manager />} />
 					<Route path="/office" element={<Office />} />
 				</Route>
