@@ -1,9 +1,13 @@
 .modal-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "jura", sans-serif;
 	padding: 0.5rem 1rem;
 	background-color: #61dafb;
 	color: #fff;
 	border: none;
-	border-radius: 5px;
+	border-radius: 50px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: background-color 0.3s ease;

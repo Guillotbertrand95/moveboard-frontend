@@ -14,7 +14,7 @@
 
 /* Bloc modale */
 .modal-content {
-	background: #fff;
+	background-color: #023e4b;
 	border-radius: 12px;
 	padding: 20px;
 	width: 90%;
@@ -35,19 +35,24 @@
 
 /* Liste des éléments */
 .entity-list {
-	list-style: none;
+	display: flex;
+	flex-direction: column;
 	padding: 0;
 	margin: 0 0 20px 0;
+	gap: 5px;
 
+	.entity-item {
+		border-radius: 20px;
+	}
 	li {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 10px 15px;
-		border-bottom: 1px solid #eee;
 
 		&:hover {
 			background: #f9f9f9;
+			color: #023e4b;
 		}
 
 		.entity-info {
@@ -64,7 +69,7 @@
 				margin-left: 5px;
 				padding: 5px 10px;
 				border: none;
-				border-radius: 6px;
+				border-radius: 20px;
 				cursor: pointer;
 				font-size: 0.9rem;
 

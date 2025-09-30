@@ -72,7 +72,10 @@ export default function EntityManagerModal({
 					) : (
 						<ul className="entity-list">
 							{items.map((item) => (
-								<li key={item._id || item.id}>
+								<li
+									className="entity-item"
+									key={item._id || item.id}
+								>
 									<span>
 										{item.name || item.title || "Sans nom"}
 									</span>

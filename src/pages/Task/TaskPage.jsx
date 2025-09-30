@@ -17,6 +17,11 @@ export default function TaskPage() {
 		<div className="task-page">
 			<h1>Gestion des Tâches</h1>
 			<div className="task-filters">
+				<input
+					type="date"
+					value={selectedDate}
+					onChange={(e) => setSelectedDate(e.target.value)}
+				/>
 				<select
 					value={selectedStaff}
 					onChange={(e) => setSelectedStaff(e.target.value)}
@@ -28,12 +33,6 @@ export default function TaskPage() {
 						</option>
 					))}
 				</select>
-
-				<input
-					type="date"
-					value={selectedDate}
-					onChange={(e) => setSelectedDate(e.target.value)}
-				/>
 			</div>
 
 			{selectedStaff && selectedDate && (

@@ -1,5 +1,5 @@
 // src/components/TaskManager.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import GenericForm from "../../components/GenericForm";
 import "../../styles/TaskManager.scss";
 import {
@@ -8,13 +8,14 @@ import {
 	updateTask,
 	deleteTask,
 } from "./TaskService.js";
-import { useMemo } from "react";
+
 export default function TaskManager({ staffId, date }) {
 	const [tasks, setTasks] = useState([]);
+	const [formKey, setFormKey] = useState(0); // Pour reset du formulaire
 
 	// On charge les tâches quand staffId ou date change
 	useEffect(() => {
-		if (!staffId || !date) return;
+		if (!staffId) return;
 
 		fetchTasksByStaffAndDate(staffId, date)
 			.then((data) => setTasks(data || []))
@@ -22,9 +23,21 @@ export default function TaskManager({ staffId, date }) {
 	}, [staffId, date]);
 
 	const handleAddTask = (data) => {
-		addTask({ ...data, staffId, date }).then((newTask) =>
-			setTasks((prev) => [...prev, newTask])
-		);
+		const { title, description, status } = data;
+		if (!title || !description || !status) {
+			alert("⚠️ Veuillez remplir tous les champs.");
+			return;
+		}
+
+		addTask({ ...data, staffId, date })
+			.then((newTask) => {
+				setTasks((prev) => [...prev, newTask]);
+				setFormKey((prev) => prev + 1); // reset GenericForm
+			})
+			.catch((err) => {
+				console.error(err);
+				alert("Erreur lors de l'ajout de la tâche.");
+			});
 	};
 
 	const handleDeleteTask = (taskId) => {
@@ -40,7 +53,7 @@ export default function TaskManager({ staffId, date }) {
 			);
 		});
 	};
-	// dans TaskManager
+
 	const taskFormFields = useMemo(
 		() => [
 			{ name: "title", label: "Titre" },
@@ -54,6 +67,7 @@ export default function TaskManager({ staffId, date }) {
 		],
 		[]
 	);
+
 	return (
 		<div className="task-manager">
 			<div className="kanban-columns">
@@ -99,6 +113,7 @@ export default function TaskManager({ staffId, date }) {
 			<div className="task-add-form">
 				<h3>Ajouter une tâche / commentaire</h3>
 				<GenericForm
+					key={formKey} // <- reset automatique après submit
 					fields={taskFormFields}
 					onSubmit={handleAddTask}
 					submitLabel="Ajouter"
