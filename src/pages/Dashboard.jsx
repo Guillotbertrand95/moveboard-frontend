@@ -1,11 +1,16 @@
 import "../styles/Dashboard.scss";
-
 import DashboardButton from "../components/DashboardButton";
 
 export default function Dashboard() {
 	return (
-		<>
-			<div className="dashboard-container">
+		<div className="dashboard-container">
+			<div className="intro-dashboard">
+				<h1>Espace Manager</h1>
+				<p>
+					Bienvenue ! Ici vous pouvez gérer les collaborateurs,
+					fournisseurs, informations, etc.
+				</p>
+
 				<div className="dashboard-buttons">
 					<DashboardButton
 						label="📦 Gestion des stocks"
@@ -19,6 +24,6 @@ export default function Dashboard() {
 					<DashboardButton label="📋 Menus" path="/menus" />
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

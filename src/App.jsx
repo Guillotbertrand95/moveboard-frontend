@@ -12,7 +12,7 @@ const LandingPage = lazy(() => import("./pages/LandingPage"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Stock = lazy(() => import("./pages/Stock"));
+const StockPage = lazy(() => import("./pages/stock/StockPage"));
 const Reservations = lazy(() => import("./pages/Reservations"));
 const TaskPage = lazy(() => import("./pages/Task/TaskPage"));
 const Manager = lazy(() => import("./pages/Manager"));
@@ -37,7 +37,7 @@ export default function App() {
 						}
 					>
 						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/stock" element={<Stock />} />
+						<Route path="/stock" element={<StockPage />} />
 						<Route
 							path="/reservations"
 							element={<Reservations />}

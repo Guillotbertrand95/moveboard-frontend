@@ -1,3 +1,13 @@
+.manager {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 20px;
+	background: #023e4b;
+}
+
 .intro-manager {
 	display: flex;
 	flex-direction: column;
@@ -7,16 +17,16 @@
 	font-family: "jura", sans-serif;
 }
 .action-manager {
-	margin-top: 30px;
+	margin: 30px 0;
 	display: flex;
 	justify-content: center;
 
-	gap: 20px;
+	gap: 10px;
 
 	display: grid;
 	grid-template-columns: repeat(2, 1fr); // 2 colonnes fixes
 	grid-template-rows: repeat(2, 1fr); // 2 lignes fixes (optionnel)
-	gap: 1.5rem;
+
 	width: 80%;
-	height: 300px;
+	height: 200px;
 }

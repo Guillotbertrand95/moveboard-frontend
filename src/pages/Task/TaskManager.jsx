@@ -1,4 +1,3 @@
-// src/components/TaskManager.jsx
 import { useEffect, useState, useMemo } from "react";
 import GenericForm from "../../components/GenericForm";
 import "../../styles/TaskManager.scss";

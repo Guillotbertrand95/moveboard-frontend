@@ -1,0 +1,82 @@
+/* -----------------------------
+  Kanban Stock
+----------------------------- */
+.stock-manager {
+	.kanban-columns {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.kanban-column {
+		flex: 1;
+		background: #e9ecef;
+		padding: 1rem;
+		border-radius: 10px;
+		min-width: 250px;
+
+		h3 {
+			text-align: center;
+			margin-bottom: 1rem;
+			font-size: 1.2rem;
+			color: #555;
+		}
+
+		.stock-card {
+			background: #fff;
+			padding: 1rem;
+			border-radius: 8px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			margin-bottom: 1rem;
+			transition: transform 0.2s ease;
+
+			&:hover {
+				transform: translateY(-2px);
+			}
+
+			.stock-title {
+				font-weight: bold;
+				margin-bottom: 0.5rem;
+				font-size: 1.1rem;
+				color: #333;
+			}
+
+			p {
+				margin-bottom: 0.5rem;
+				color: #555;
+				font-size: 0.95rem;
+			}
+
+			.stock-actions {
+				display: flex;
+				justify-content: space-between;
+
+				button {
+					padding: 0.4rem 0.8rem;
+					border-radius: 6px;
+					border: none;
+					cursor: pointer;
+					font-size: 0.9rem;
+					transition: 0.2s;
+
+					&:hover {
+						opacity: 0.85;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Optionnel : couleurs selon status */
+.kanban-column:nth-child(1) .stock-card {
+	border-left: 4px solid #007bff; /* Disponible */
+}
+
+.kanban-column:nth-child(2) .stock-card {
+	border-left: 4px solid #ffc107; /* En cours */
+}
+
+.kanban-column:nth-child(3) .stock-card {
+	border-left: 4px solid #28a745; /* Épuisé */
+}
