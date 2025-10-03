@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-	fetchStockByStaffAndDate,
-	addStock,
-	updateStock,
-	deleteStock,
-} from "./StockService";
+import { fetchStock, addStock, updateStock, deleteStock } from "./StockService";
+
 import "../../styles/StockManager.scss";
 
-export default function StockManager({ staffId, date }) {
+export default function StockManager({ date, staffId }) {
 	const [stockItems, setStockItems] = useState([]);
 	const [formData, setFormData] = useState({
 		title: "",
@@ -19,7 +15,7 @@ export default function StockManager({ staffId, date }) {
 	// Charger les stocks
 	const loadStock = async () => {
 		if (!staffId || !date) return;
-		const data = await fetchStockByStaffAndDate(staffId, date);
+		const data = await fetchStock(date, staffId); // <-- appel corrigé
 		setStockItems(data);
 	};
 
@@ -32,20 +28,29 @@ export default function StockManager({ staffId, date }) {
 
 	useEffect(() => {
 		loadStock();
-	}, [staffId, date]);
+	}, [date, staffId]);
 
 	const handleAddStock = async () => {
 		if (!formData.title || !formData.supplier) return;
-		await addStock({ ...formData, staffId, date });
-		setFormData({ title: "", content: "", supplier: "" });
-		loadStock();
+
+		const stockData = {
+			selectedStaffId: staffId, // <-- correspond au collaborateur choisi
+			date: date, // vérifie que c'est une string ISO ou objet Date
+			title: formData.title,
+			content: formData.content,
+			supplier: formData.supplier, // si tu veux stocker le fournisseur
+		};
+
+		try {
+			await addStock(stockData);
+			setFormData({ title: "", content: "", supplier: "" });
+			loadStock();
+		} catch (err) {
+			console.error("Erreur ajout stock :", err.response?.data || err);
+		}
 	};
 
-	const handleUpdateStock = async (id, updatedData) => {
-		await updateStock(id, updatedData);
-		loadStock();
-	};
-
+	// Supprimer un stock
 	const handleDeleteStock = async (id) => {
 		await deleteStock(id);
 		loadStock();
@@ -60,29 +65,20 @@ export default function StockManager({ staffId, date }) {
 					placeholder="Titre de la commande"
 					value={formData.title}
 					onChange={(e) =>
-						setFormData((prev) => ({
-							...prev,
-							title: e.target.value,
-						}))
+						setFormData({ ...formData, title: e.target.value })
 					}
 				/>
 				<textarea
 					placeholder="Contenu / Description"
 					value={formData.content}
 					onChange={(e) =>
-						setFormData((prev) => ({
-							...prev,
-							content: e.target.value,
-						}))
+						setFormData({ ...formData, content: e.target.value })
 					}
 				/>
 				<select
 					value={formData.supplier}
 					onChange={(e) =>
-						setFormData((prev) => ({
-							...prev,
-							supplier: e.target.value,
-						}))
+						setFormData({ ...formData, supplier: e.target.value })
 					}
 				>
 					<option value="">-- choisir un fournisseur --</option>
@@ -102,6 +98,10 @@ export default function StockManager({ staffId, date }) {
 						<h4>{item.title}</h4>
 						<p>{item.content}</p>
 						<p>Fournisseur: {item.supplier?.name || "—"}</p>
+						<p>
+							Créé par: {item.createdBy?.username || "—"} (
+							{item.createdBy?._id || "—"})
+						</p>
 						<div className="stock-actions">
 							<button onClick={() => handleDeleteStock(item._id)}>
 								Supprimer

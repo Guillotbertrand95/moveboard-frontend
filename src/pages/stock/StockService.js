@@ -1,27 +1,26 @@
-// src/pages/Stock/StockService.js
-import api from "../../api/apiService"; // ton axios configuré
+import api from "../../api/apiService"; // ton instance Axios
 
-// Récupérer les items de stock par collaborateur et date
-export const fetchStockByStaffAndDate = async (staffId, date) => {
+// Récupérer les commandes d'un collaborateur à une date
+export const fetchStock = async (date, staffId) => {
 	const res = await api.get("/stock", {
-		params: { staffId, date, t: new Date().getTime() },
+		params: { staffId, date, t: new Date().getTime() }, // t pour éviter le cache
 	});
 	return res.data;
 };
 
-// Ajouter une commande de stock
+// Ajouter une commande
 export const addStock = async (stockData) => {
 	const res = await api.post("/stock", stockData);
 	return res.data;
 };
 
-// Mettre à jour un item existant
+// Mettre à jour une commande
 export const updateStock = async (stockId, updatedData) => {
 	const res = await api.put(`/stock/${stockId}`, updatedData);
 	return res.data;
 };
 
-// Supprimer un item
+// Supprimer une commande
 export const deleteStock = async (stockId) => {
 	const res = await api.delete(`/stock/${stockId}`);
 	return res.data;

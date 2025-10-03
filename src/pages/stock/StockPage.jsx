@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchStockByStaffAndDate } from "./StockService";
+
 import StockManager from "./StockManager";
 import ModalButton from "../../components/ModalButton";
 import "../../styles/StockPage.scss";
