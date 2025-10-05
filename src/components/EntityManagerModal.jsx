@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import GenericForm from "./GenericForm";
+import FancyButton from "./FancyButton"; // ✅ On importe ton bouton stylé
 import "../styles/EntityManagerModal.scss";
+
 export default function EntityManagerModal({
 	title,
 	fields,
@@ -80,7 +82,8 @@ export default function EntityManagerModal({
 										{item.name || item.title || "Sans nom"}
 									</span>
 									<div className="btnGestion">
-										<button
+										<FancyButton
+											variant="edit"
 											onClick={() =>
 												setFormModal({
 													mode: "edit",
@@ -89,8 +92,9 @@ export default function EntityManagerModal({
 											}
 										>
 											Modifier
-										</button>
-										<button
+										</FancyButton>
+										<FancyButton
+											variant="delete"
 											onClick={() =>
 												handleDelete(
 													item._id || item.id
@@ -98,7 +102,7 @@ export default function EntityManagerModal({
 											}
 										>
 											Supprimer
-										</button>
+										</FancyButton>
 									</div>
 								</li>
 							))}
@@ -107,9 +111,13 @@ export default function EntityManagerModal({
 				</>
 			)}
 
-			<button onClick={() => setFormModal({ mode: "add", data: {} })}>
+			{/* Bouton ajouter */}
+			<FancyButton
+				variant="default"
+				onClick={() => setFormModal({ mode: "add", data: {} })}
+			>
 				➕ Ajouter
-			</button>
+			</FancyButton>
 
 			{/* Seconde modale pour ajouter/modifier */}
 			{formModal && (

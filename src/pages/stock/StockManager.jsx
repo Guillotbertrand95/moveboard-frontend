@@ -97,10 +97,10 @@ export default function StockManager({ date, staffId }) {
 					<div key={item._id} className="stock-card">
 						<h4>{item.title}</h4>
 						<p>{item.content}</p>
-						<p>Fournisseur: {item.supplier?.name || "—"}</p>
+						<p>Fournisseur: {item.supplier?.name || ""}</p>
 						<p>
-							Créé par: {item.createdBy?.username || "—"} (
-							{item.createdBy?._id || "—"})
+							Créé par: {item.createdBy?.username || ""} (
+							{item.createdBy?._id || ""})
 						</p>
 						<div className="stock-actions">
 							<button onClick={() => handleDeleteStock(item._id)}>

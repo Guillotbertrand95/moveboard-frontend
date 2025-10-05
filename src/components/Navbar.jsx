@@ -15,10 +15,10 @@ function Navbar() {
 			<h2 className="navbar__logo">Moveboard</h2>
 			<ul className="navbar__links">
 				<li>
-					<Link to="/dashboard">Dashboard</Link>
+					<Link to="/dashboard">Tableau de bord</Link>
 				</li>
 				<li>
-					<Link to="/manager">Manager</Link>
+					<Link to="/manager">Gestion</Link>
 				</li>
 				<li>
 					<Link to="/office">Office</Link>
