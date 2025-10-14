@@ -16,7 +16,9 @@ const StockPage = lazy(() => import("./pages/stock/StockPage"));
 const Reservations = lazy(() => import("./pages/Reservations"));
 const TaskPage = lazy(() => import("./pages/Task/TaskPage"));
 const Manager = lazy(() => import("./pages/Manager"));
-const Office = lazy(() => import("./pages/Office"));
+const OfficeDashboardPage = lazy(() =>
+	import("./pages/OfficeDashboard/OfficeDashboardPage")
+);
 
 export default function App() {
 	return (
@@ -44,7 +46,10 @@ export default function App() {
 						/>
 						<Route path="/tasks" element={<TaskPage />} />
 						<Route path="/manager" element={<Manager />} />
-						<Route path="/office" element={<Office />} />
+						<Route
+							path="/office"
+							element={<OfficeDashboardPage />}
+						/>
 					</Route>
 				</Routes>
 			</Suspense>

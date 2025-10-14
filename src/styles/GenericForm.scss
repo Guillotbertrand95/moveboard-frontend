@@ -17,7 +17,8 @@
 		}
 
 		input,
-		textarea {
+		textarea,
+		select {
 			padding: 0.5rem 0.7rem;
 			border: 1px solid #ccc;
 			border-radius: 20px;
@@ -29,6 +30,10 @@
 				border-color: #007bff;
 				box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 			}
+		}
+		select {
+			background-color: #fff;
+			cursor: pointer;
 		}
 
 		textarea {

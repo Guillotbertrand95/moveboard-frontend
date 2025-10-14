@@ -24,7 +24,17 @@ export default function Manager() {
 	const collaboratorFields = [
 		{ name: "name", label: "Nom" },
 		{ name: "firstname", label: "Prénom" },
-		{ name: "section", label: "Section" },
+		{
+			name: "section",
+			label: "Section",
+			type: "select",
+			options: [
+				{ value: "cuisine", label: "Cuisine" },
+				{ value: "bar", label: "Bar" },
+				{ value: "service", label: "Service" },
+				{ value: "plonge", label: "Plonge" },
+			],
+		},
 		{ name: "role", label: "Rôle" },
 		{ name: "telephone", label: "Téléphone" },
 		{ name: "email", label: "Email", type: "email" },

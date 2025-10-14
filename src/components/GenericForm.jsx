@@ -1,4 +1,3 @@
-// src/components/GenericForm.jsx
 import { useState } from "react";
 import "../styles/GenericForm.scss";
 
@@ -32,9 +31,11 @@ export default function GenericForm({
 		<form onSubmit={handleSubmit} className="generic-form">
 			{fields.map((field) => (
 				<div key={field.name} className="form-group">
-					<label>{field.label}</label>
+					<label htmlFor={field.name}>{field.label}</label>
+
 					{field.type === "textarea" ? (
 						<textarea
+							id={field.name}
 							name={field.name}
 							value={values[field.name]}
 							onChange={handleChange}
@@ -42,18 +43,28 @@ export default function GenericForm({
 						/>
 					) : field.type === "select" ? (
 						<select
+							id={field.name}
 							name={field.name}
 							value={values[field.name]}
 							onChange={handleChange}
 						>
+							{/* Option vide par défaut */}
+							<option value="">-- Sélectionner --</option>
+
+							{/* Supporte à la fois un tableau simple ["bar", "cuisine"] 
+                  ou un tableau d’objets [{ value, label }] */}
 							{field.options?.map((opt) => (
-								<option key={opt} value={opt}>
-									{opt}
+								<option
+									key={opt.value || opt}
+									value={opt.value || opt}
+								>
+									{opt.label || opt}
 								</option>
 							))}
 						</select>
 					) : (
 						<input
+							id={field.name}
 							type={field.type || "text"}
 							name={field.name}
 							value={values[field.name]}
@@ -63,7 +74,10 @@ export default function GenericForm({
 					)}
 				</div>
 			))}
-			<button type="submit">{submitLabel || "Submit"}</button>
+
+			<button type="submit" className="submit-btn">
+				{submitLabel || "Valider"}
+			</button>
 		</form>
 	);
 }

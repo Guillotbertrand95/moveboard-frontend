@@ -1,0 +1,46 @@
+.office-dashboard {
+	padding: 20px;
+
+	.calendar-view {
+		margin-bottom: 20px;
+	}
+
+	.dashboard-filters {
+		display: flex;
+		gap: 10px;
+		margin-bottom: 20px;
+	}
+
+	.dashboard-table {
+		width: 100%;
+		border-collapse: collapse;
+
+		th,
+		td {
+			border: 1px solid #ccc;
+			padding: 8px;
+		}
+	}
+}
+
+.modal-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.modal-content {
+		background: #fff;
+		padding: 20px;
+		border-radius: 8px;
+		max-width: 500px;
+		width: 100%;
+	}
+
+	.modal-close {
+		float: right;
+		cursor: pointer;
+	}
+}
